@@ -124,22 +124,19 @@ def downloadIg(url):
     }
     try:
         dataJson = igdl(url)
-        if not dataJson.get("error"):
-            if dataJson['user']['username'] not in os.listdir(download_Path.get()):
-                os.mkdir(download_Path.get()+"/"+dataJson['user']['username'])
-            path = download_Path.get()+"/"+dataJson['user']['username']+"/"+typePost
-            path_list = []
-            if typePost not in os.listdir(download_Path.get()):
-                os.mkdir(path)
-            medias = dataJson['medias']
-            total = 0
-            for i in medias:
-                ppath = downloadFileUrl(i['url'], path+"/"+randomStr(10)+"."+i["fileType"])
-                path_list.append(ppath)
-                total += 1
-            progress_done = True
-        else:
-            messagebox.showerror("Error", dataJson.get("error"))
+        if dataJson['user']['username'] not in os.listdir(download_Path.get()):
+            os.mkdir(download_Path.get()+"/"+dataJson['user']['username'])
+        path = download_Path.get()+"/"+dataJson['user']['username']+"/"+typePost
+        path_list = []
+        if typePost not in os.listdir(download_Path.get()):
+            os.mkdir(path)
+        medias = dataJson['medias']
+        total = 0
+        for i in medias:
+            ppath = downloadFileUrl(i['url'], path+"/"+randomStr(10)+"."+i["fileType"])
+            path_list.append(ppath)
+            total += 1
+        progress_done = True
     except Exception as e:
         logError(e)
         try:
