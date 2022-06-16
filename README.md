@@ -1,4 +1,4 @@
-# Intagram-Downloader
+# Intagram Downloader
 
 ```
 pip install -r requirements.txt
